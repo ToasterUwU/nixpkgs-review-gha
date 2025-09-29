@@ -168,10 +168,12 @@ jobs:
         with:
           repository: NixOS/nixpkgs
           path: nixpkgs
-          persist-credentials: false
+          filter: "blob:none"
+          fetch-depth: "0"
 
       - name: run nixpkgs-review ${{ inputs.extra-args }}
         run: |
+          git config --global user.name "github-actions[bot]"
           nixpkgs-review -- \
             pr ${PR_NUMBER} \
             --no-shell \
